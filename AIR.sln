@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AiR 1.1.0 BETA", "AiR 1.1.0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{B3D869A1-E502-4497-8D85-DD9035E23624}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonApplication1", "PythonApplication1\PythonApplication1.pyproj", "{BACDD2ED-98C6-4D6F-B887-FF13DC80D0C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,12 @@ Global
 		{B3D869A1-E502-4497-8D85-DD9035E23624}.Release|x64.Build.0 = Release|Any CPU
 		{B3D869A1-E502-4497-8D85-DD9035E23624}.Release|x86.ActiveCfg = Release|Any CPU
 		{B3D869A1-E502-4497-8D85-DD9035E23624}.Release|x86.Build.0 = Release|Any CPU
+		{BACDD2ED-98C6-4D6F-B887-FF13DC80D0C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BACDD2ED-98C6-4D6F-B887-FF13DC80D0C5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BACDD2ED-98C6-4D6F-B887-FF13DC80D0C5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BACDD2ED-98C6-4D6F-B887-FF13DC80D0C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BACDD2ED-98C6-4D6F-B887-FF13DC80D0C5}.Release|x64.ActiveCfg = Release|Any CPU
+		{BACDD2ED-98C6-4D6F-B887-FF13DC80D0C5}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
