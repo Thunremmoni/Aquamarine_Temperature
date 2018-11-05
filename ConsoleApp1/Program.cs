@@ -79,6 +79,10 @@ namespace ConsoleApp1
 				{
 					return name + " " + inStoreHouse.ToString();
 				}
+				public bool Avaliable(int Quantity = 1)
+				{
+					return inStoreHouse >= Quantity;
+				}
 			}	 //货物
 			public Good Make_Good(string name,int nums)
 			{
