@@ -35,8 +35,6 @@ namespace AiR_1._1._0_BETA
 				Console.WriteLine("AiR Version " + Version + "\n");
 				Console.WriteLine("\tESP\t{0}\n\t\t{1}\n", ESP.Overview, ESP.Features);
 				Console.WriteLine("\tVMITP\t{0}\n\t\t{1}\n", VMITP.Overview, VMITP.Features);
-				Console.WriteLine("\tMITC\t{0}\n\t\t{1}\n", MITC.Overview, MITC.Features);
-				Console.WriteLine("\tDFMP\t{0}\n\t\t{1}\n", DFMP.Overview, DFMP.Features);
 			}
 			public static void Solve(string[] command)
 			{
@@ -166,75 +164,6 @@ namespace AiR_1._1._0_BETA
 				}
 			}
 		}
-		static class MITC   //管理
-		{
-			public static readonly string Version = "1.0";
-			public static readonly string Overview = "Investor Management";
-			public static readonly string Features = "Includes a virtual stock market allocation system to manage the interests and dividends between different investors";
-
-			public class Member_Info
-			{
-				string name;
-				int ID, share, AvaliableProfit, UnavaliableProfit, TotalProfit, Funds;
-
-				public string ToString {
-					get {
-						return (name + " " + ID.ToString() + " " + share.ToString() + " " + AvaliableProfit.ToString() + " " + UnavaliableProfit.ToString() + " " + TotalProfit.ToString() + " " + Funds.ToString());
-					}
-				}
-				public Member_Info Make(string inp)
-				{
-					Member_Info ret = new Member_Info { };
-					string[] div = inp.Split(' ');
-					name = div[0];
-					share = Convert.ToInt32(div[1]); AvaliableProfit = Convert.ToInt32(div[2]); UnavaliableProfit = Convert.ToInt32(div[3]); TotalProfit = Convert.ToInt32(div[4]); Funds = Convert.ToInt32(div[5]);
-					return ret;
-				}
-			}
-			public static List<Member_Info> Members;
-			public class Trace_Info
-			{
-				string name;
-				int ID, type, amount, nowFunds, nowShare, avaliableProfit;
-				
-			}
-			public static List<Trace_Info> Trace;
-
-			public static void Solve(string[] command)
-			{
-				if (command[0] != "mitc")
-				{
-					Console.WriteLine("ERROR : Unknown Command\n");
-					return;
-				} else if (command.Length <= 1)
-				{
-					Console.WriteLine("ERROR : Too Much Argument\n");
-					return;
-				}
-
-				switch (command[1])
-				{
-					case "-h":
-						Console.WriteLine("MITC Version " + Version);
-						Console.WriteLine("\t" + Features + "\n");
-						Console.WriteLine("\t--help\t-h\tShow Help and Commands\n");
-						Console.WriteLine("\t--all\t-a\tShow All Infomation\n\t\t\tIncludes information on all investors and traces of transactions\n");
-
-						break;
-					default:
-						Console.WriteLine("ERROR : Unknown Command\n");
-						return;
-				}
-
-			}
-		}
-		static class DFMP	//文档
-		{
-			public static readonly string Version = "1.0";
-			public static readonly string Overview = "Save File to your operating system";
-			public static readonly string Features = "Unavaliable";
-
-		}
 
 		//MAIN
 		static void Main(string[] args)
@@ -327,9 +256,6 @@ namespace AiR_1._1._0_BETA
 						break;
 					case "esp":
 						ESP.Solve(div);
-						break;
-					case "mitc":
-						MITC.Solve(div);
 						break;
 
 					default:
