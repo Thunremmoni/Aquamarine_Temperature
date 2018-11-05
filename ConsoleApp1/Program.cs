@@ -50,7 +50,7 @@ namespace ConsoleApp1
 			{
 				Date ret = new Date { };
 				string[] div = it.Split('-');
-				if (div.Length < 3) div = it.Split(' ');
+				if (div.Length < 3) div=it.Split(' ');
 				if (div.Length < 3) return ret;
 				ret.year = Convert.ToInt32(div[0]);ret.month = Convert.ToInt32(div[1]);ret.day = Convert.ToInt32(div[2]);
 				return ret;
@@ -58,48 +58,15 @@ namespace ConsoleApp1
 			public static Date Make_Date(string[] div, int pos = 0)
 			{
 				Date ret = new Date { };
-				try {
-					ret.year = Convert.ToInt32(div[pos]);
-					ret.month = Convert.ToInt32(div[pos + 1]);
-					ret.day = Convert.ToInt32(div[pos + 2]);
-				} catch { }
+				if (pos + 2 >= div.Length) return ret;
+				ret.year = Convert.ToInt32(div[pos]); ret.month = Convert.ToInt32(div[pos + 1]); ret.day = Convert.ToInt32(div[pos + 2]);
 				return ret;
 			}
 		}
 	}
 	namespace Objects	//对象
 	{
-		class Trace
-		{
-			public class Good
-			{
-				public string name;
-				public int inStoreHouse;
-				public string String()
-				{
-					return name + " " + inStoreHouse.ToString();
-				}
-			}	 //货物
-			public Good Make_Good(string name,int nums)
-			{
-				Good ret = new Good { };
-				ret.name = name;ret.inStoreHouse = nums;
-				return ret;
-			}
-			public Good Make_Good(string it)
-			{
-				Good ret = new Good { };
-				string[] div = it.Split(' ');
-				try{ret.name = div[0]; ret.inStoreHouse = Convert.ToInt32(div[1]); } catch { }
-				return ret;
-			}
-			public Good Make_Good(string[] div,int pos = 0)
-			{
-				Good ret = new Good { };
-				try { ret.name = div[pos]; ret.inStoreHouse = Convert.ToInt32(div[1]); } catch { }
-				return ret;
-			}
-		}
+		
 	}
 
 	class Program
@@ -121,8 +88,6 @@ namespace ConsoleApp1
 			//for (int i = 0; i < 3; i++)
 			//	sw.WriteLine(Console.ReadLine());
 			//sw.Flush();sw.Close();fs.Close();
-
-			Dictionary<int, int> map = new Dictionary<int, int> { { 1, 2 },{ 2, 3 },{ 100, 2 } };
 
 		}
 	}
