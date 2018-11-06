@@ -15,7 +15,7 @@ namespace ConsoleApp1
 			{
 				public Type first, second;
 			}
-			static Pair<T> Make_Pair<T>(T a, T b)
+			public static Pair<T> Make_Pair<T>(T a, T b)
 			{
 				Pair<T> ret = new Pair<T> { };
 				ret.first = a; ret.second = b;
@@ -67,9 +67,9 @@ namespace ConsoleApp1
 			}
 		}
 	}
-	namespace Objects	//对象
+	namespace Objs	//对象
 	{
-		class Trace
+		public static class Trace
 		{
 			public class Good
 			{
@@ -84,33 +84,36 @@ namespace ConsoleApp1
 					return inStoreHouse >= Quantity;
 				}
 			}	 //货物
-			public Good Make_Good(string name,int nums)
+			public static Good Make_Good(string name,int nums)
 			{
 				Good ret = new Good { };
 				ret.name = name;ret.inStoreHouse = nums;
 				return ret;
 			}
-			public Good Make_Good(string it)
+			public static Good Make_Good(string it)
 			{
 				Good ret = new Good { };
 				string[] div = it.Split(' ');
 				try{ret.name = div[0]; ret.inStoreHouse = Convert.ToInt32(div[1]); } catch { }
 				return ret;
 			}
-			public Good Make_Good(string[] div,int pos = 0)
+			public static Good Make_Good(string[] div,int pos = 0)
 			{
 				Good ret = new Good { };
 				try { ret.name = div[pos]; ret.inStoreHouse = Convert.ToInt32(div[1]); } catch { }
 				return ret;
 			}
-
+		}
+		public static class Data
+		{
+			public static List<Trace.Good> goods;
 		}
 	}
-	namespace Tools
+	namespace ToolKit
 	{
-		static class FileManager
+		public static class FileManager
 		{
-			static bool DeleteFile(string path)	//删除文件/文件夹
+			public static bool DeleteFile(string path)	//删除文件/文件夹
 			{
 				try
 				{
@@ -120,7 +123,7 @@ namespace ConsoleApp1
 				} catch { return false; }
 				return true;
 			}
-			static bool CopyTo(string path,string targetPath)	//克隆文件
+			public static bool CopyTo(string path,string targetPath)	//克隆文件
 			{
 				try
 				{
@@ -128,6 +131,43 @@ namespace ConsoleApp1
 					file.CopyTo(targetPath, true);
 				} catch { return false; }
 				return true;
+			}
+			public static void OpenFile(string path)
+			{
+				Console.WriteLine("Start reading data from " + path);
+				try
+				{
+					StreamReader readStream = new StreamReader(path, Encoding.Default);
+					string read;
+					while ((read = readStream.ReadLine()) != null)
+						switch (read)
+						{
+							case "goods":
+								Objs.Data.goods = new List<Objs.Trace.Good> { };
+								int cnt = Convert.ToInt32(readStream.ReadLine());
+								for (int i = 0; i < cnt; i++)
+									Objs.Data.goods.Add(Objs.Trace.Make_Good(readStream.ReadLine()));
+								Console.WriteLine("Product information : " + cnt.ToString() + " Records has been read");
+								break;
+							default:
+								Console.WriteLine("WARNING : Unknow data tag " + read);
+								break;
+						}
+					Console.WriteLine("Finished!");
+				} catch
+				{
+					Console.WriteLine("ERROR : An error occurred during reading. Target file failed to read successfully!");
+				}
+			}
+			public static void SaveFileAs(string path)
+			{
+				FileStream fs = new FileStream(path, FileMode.Create); StreamWriter writeStream = new StreamWriter(fs);
+				//Goods
+				writeStream.WriteLine("goods\n" + Objs.Data.goods.Count.ToString());
+				foreach (var item in Objs.Data.goods) writeStream.WriteLine(item.String());
+				writeStream.Flush();
+
+				writeStream.Flush(); writeStream.Close(); fs.Close();
 			}
 		}
 	}
@@ -151,7 +191,6 @@ namespace ConsoleApp1
 			//for (int i = 0; i < 3; i++)
 			//	sw.WriteLine(Console.ReadLine());
 			//sw.Flush();sw.Close();fs.Close();
-
 		}
 	}
 }
