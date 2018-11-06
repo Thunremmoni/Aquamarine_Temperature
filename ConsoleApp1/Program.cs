@@ -106,6 +106,31 @@ namespace ConsoleApp1
 
 		}
 	}
+	namespace Tools
+	{
+		static class FileManager
+		{
+			static bool DeleteFile(string path)	//删除文件/文件夹
+			{
+				try
+				{
+					if (File.GetAttributes(path) == FileAttributes.Directory)
+						Directory.Delete(path);
+					else DeleteFile(path);
+				} catch { return false; }
+				return true;
+			}
+			static bool CopyTo(string path,string targetPath)	//克隆文件
+			{
+				try
+				{
+					FileInfo file = new FileInfo(path);
+					file.CopyTo(targetPath, true);
+				} catch { return false; }
+				return true;
+			}
+		}
+	}
 
 	class Program
 	{
