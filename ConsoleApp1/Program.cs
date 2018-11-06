@@ -103,6 +103,7 @@ namespace ConsoleApp1
 				try { ret.name = div[pos]; ret.inStoreHouse = Convert.ToInt32(div[1]); } catch { }
 				return ret;
 			}
+
 		}
 	}
 
@@ -125,8 +126,6 @@ namespace ConsoleApp1
 			//for (int i = 0; i < 3; i++)
 			//	sw.WriteLine(Console.ReadLine());
 			//sw.Flush();sw.Close();fs.Close();
-
-			Dictionary<int, int> map = new Dictionary<int, int> { { 1, 2 },{ 2, 3 },{ 100, 2 } };
 
 		}
 	}
