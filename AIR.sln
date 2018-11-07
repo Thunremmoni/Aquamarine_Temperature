@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonApplication1", "PythonApplication1\PythonApplication1.pyproj", "{BACDD2ED-98C6-4D6F-B887-FF13DC80D0C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{17635182-50A3-4623-906A-0FAD676A7B3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,18 @@ Global
 		{BACDD2ED-98C6-4D6F-B887-FF13DC80D0C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BACDD2ED-98C6-4D6F-B887-FF13DC80D0C5}.Release|x64.ActiveCfg = Release|Any CPU
 		{BACDD2ED-98C6-4D6F-B887-FF13DC80D0C5}.Release|x86.ActiveCfg = Release|Any CPU
+		{17635182-50A3-4623-906A-0FAD676A7B3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17635182-50A3-4623-906A-0FAD676A7B3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17635182-50A3-4623-906A-0FAD676A7B3C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{17635182-50A3-4623-906A-0FAD676A7B3C}.Debug|x64.Build.0 = Debug|Any CPU
+		{17635182-50A3-4623-906A-0FAD676A7B3C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{17635182-50A3-4623-906A-0FAD676A7B3C}.Debug|x86.Build.0 = Debug|Any CPU
+		{17635182-50A3-4623-906A-0FAD676A7B3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17635182-50A3-4623-906A-0FAD676A7B3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17635182-50A3-4623-906A-0FAD676A7B3C}.Release|x64.ActiveCfg = Release|Any CPU
+		{17635182-50A3-4623-906A-0FAD676A7B3C}.Release|x64.Build.0 = Release|Any CPU
+		{17635182-50A3-4623-906A-0FAD676A7B3C}.Release|x86.ActiveCfg = Release|Any CPU
+		{17635182-50A3-4623-906A-0FAD676A7B3C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
