@@ -6,7 +6,6 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-
 	static class Program
 	{
 		/// <summary>
@@ -17,7 +16,10 @@ namespace WindowsFormsApp1
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Main_Form());
 		}
+
+		/// <summary>
+		/// Fuck EternalAlexander
+		/// </summary>
 	}
 }
