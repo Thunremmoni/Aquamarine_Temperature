@@ -65,6 +65,12 @@ namespace ConsoleApp1
 				} catch { }
 				return ret;
 			}
+			public static Date Make_Date(DateTime it)
+			{
+				Date ret = new Date { };
+				ret.year = it.Year;ret.month = it.Month;ret.day = it.Day;
+				return ret;
+			}
 		}
 	}
 	namespace Objs	//对象
