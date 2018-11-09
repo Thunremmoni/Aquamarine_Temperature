@@ -6,6 +6,11 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
+	static class Data
+	{
+		public static string Version = "3.0.0 GUI BETA";
+	}
+
 	static class Program
 	{
 		/// <summary>
@@ -16,10 +21,8 @@ namespace WindowsFormsApp1
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-		}
 
-		/// <summary>
-		/// Fuck EternalAlexander
-		/// </summary>
+			Application.Run(new Form1());
+		}
 	}
 }

@@ -10,23 +10,16 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApp1
 {
-	public partial class Form1 : Form
+	public partial class About_AiR : Form
 	{
-		public Form1()
+		public About_AiR()
 		{
 			InitializeComponent();
 		}
 
 		private void CloseButton_Click(object sender, EventArgs e)
 		{
-			Application.Exit();
-		}
-
-		private void VersionButton_Click(object sender, EventArgs e)
-		{
-			About_AiR aboutPage = new About_AiR();
-			aboutPage.Text = "About AiR " + Data.Version;
-			aboutPage.ShowDialog();
+			this.Close();
 		}
 	}
 }
