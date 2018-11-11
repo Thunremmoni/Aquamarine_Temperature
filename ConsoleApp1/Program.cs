@@ -14,6 +14,10 @@ namespace ConsoleApp1
 			public class Pair<Type>
 			{
 				public Type first, second;
+				string String()
+				{
+					return first.ToString() + " " + second.ToString();
+				}
 			}
 			public static Pair<T> Make_Pair<T>(T a, T b)
 			{
@@ -71,6 +75,10 @@ namespace ConsoleApp1
 				ret.year = it.Year;ret.month = it.Month;ret.day = it.Day;
 				return ret;
 			}
+		}
+		public class ERROR : ApplicationException
+		{
+			public ERROR(string message) : base(message) { }
 		}
 	}
 	namespace Objs	//对象
@@ -182,22 +190,24 @@ namespace ConsoleApp1
 	{
 		static void Main(string[] args)
 		{
-			//string path = Console.ReadLine();
-			//try
-			//{
-			//	StreamReader sr = new StreamReader(@".\" + path, Encoding.Default);
-			//	string output;
-			//	while ((output = sr.ReadLine()) != null)
-			//		Console.WriteLine(output);
-			//} catch {
-			//	Console.WriteLine("ERROR : File Doesn't exist!!");
-			//}
-			//FileStream fs = new FileStream(path, FileMode.Create);
-			//StreamWriter sw = new StreamWriter(fs);
-			//for (int i = 0; i < 3; i++)
-			//	sw.WriteLine(Console.ReadLine());
-			//sw.Flush();sw.Close();fs.Close();
-			
+			{
+				//string path = Console.ReadLine();
+				//try
+				//{
+				//	StreamReader sr = new StreamReader(@".\" + path, Encoding.Default);
+				//	string output;
+				//	while ((output = sr.ReadLine()) != null)
+				//		Console.WriteLine(output);
+				//} catch {
+				//	Console.WriteLine("ERROR : File Doesn't exist!!");
+				//}
+				//FileStream fs = new FileStream(path, FileMode.Create);
+				//StreamWriter sw = new StreamWriter(fs);
+				//for (int i = 0; i < 3; i++)
+				//	sw.WriteLine(Console.ReadLine());
+				//sw.Flush();sw.Close();fs.Close();
+			}
+
 		}
 	}
 }
