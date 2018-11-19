@@ -13,6 +13,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonApplication1", "Pytho
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{17635182-50A3-4623-906A-0FAD676A7B3C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aquamarine_Temperature 3.0.0 BETA", "Aquamarine_Temperature 3.0.0 BETA\Aquamarine_Temperature 3.0.0 BETA.csproj", "{A0C8161E-998A-405A-B382-CFC6D398B5F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,18 @@ Global
 		{17635182-50A3-4623-906A-0FAD676A7B3C}.Release|x64.Build.0 = Release|Any CPU
 		{17635182-50A3-4623-906A-0FAD676A7B3C}.Release|x86.ActiveCfg = Release|Any CPU
 		{17635182-50A3-4623-906A-0FAD676A7B3C}.Release|x86.Build.0 = Release|Any CPU
+		{A0C8161E-998A-405A-B382-CFC6D398B5F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0C8161E-998A-405A-B382-CFC6D398B5F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0C8161E-998A-405A-B382-CFC6D398B5F2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A0C8161E-998A-405A-B382-CFC6D398B5F2}.Debug|x64.Build.0 = Debug|Any CPU
+		{A0C8161E-998A-405A-B382-CFC6D398B5F2}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A0C8161E-998A-405A-B382-CFC6D398B5F2}.Debug|x86.Build.0 = Debug|Any CPU
+		{A0C8161E-998A-405A-B382-CFC6D398B5F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0C8161E-998A-405A-B382-CFC6D398B5F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0C8161E-998A-405A-B382-CFC6D398B5F2}.Release|x64.ActiveCfg = Release|Any CPU
+		{A0C8161E-998A-405A-B382-CFC6D398B5F2}.Release|x64.Build.0 = Release|Any CPU
+		{A0C8161E-998A-405A-B382-CFC6D398B5F2}.Release|x86.ActiveCfg = Release|Any CPU
+		{A0C8161E-998A-405A-B382-CFC6D398B5F2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
