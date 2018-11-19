@@ -185,6 +185,21 @@ namespace ConsoleApp1
 			}
 		}
 	}
+	public static class Tool
+	{
+		public static string Merge(string[] args, char div)
+		{
+			string ret = args[0];
+			for (int i = 1; i < args.Length; i++) ret += div + args[i];
+			return ret;
+		}
+		public static string Merge(string[] args, int begin, int end, char div)
+		{
+			string ret = args[begin];
+			for (int i = begin + 1; i < end; i++) ret += div + args[i];
+			return ret;
+		}
+	}
 
 	class Program
 	{
@@ -207,7 +222,6 @@ namespace ConsoleApp1
 				//	sw.WriteLine(Console.ReadLine());
 				//sw.Flush();sw.Close();fs.Close();
 			}
-
 		}
 	}
 }
