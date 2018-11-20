@@ -306,6 +306,14 @@ namespace Aquamarine_Temperature
 
 				trans.Add(add);
 				Console.WriteLine("Finish!");
+			}	//UF
+			static void Query()
+			{
+				Console.WriteLine("There are {0} records in total", trans.Count);
+				Console.WriteLine("\n#\tDate\tItem\tI/O\tPrice\tProfit");
+				int i = 0;
+				foreach (var it in trans)
+					Console.WriteLine("{0}\t{1}\t\t{2}\t{3}\t{4}\t{5}", ++i, it.date.String(), it.Item, it.IO ? "IN" : "OUT", it.price, it.totProfit);
 			}
 			public static void Solve(string[] args)
 			{
@@ -319,6 +327,8 @@ namespace Aquamarine_Temperature
 					case "--help": FileManager.ShowFile(@".\docs\fimng_hp.file"); break;
 					case "-a": Attend();break;
 					case "--attend": Attend();break;
+					case "-q": Query();break;
+					case "--query": Query();break;
 					default:
 						Console.WriteLine("Command syntax is incorrect"); return;
 				}
@@ -377,6 +387,9 @@ namespace Aquamarine_Temperature
 					break;
 				case "warh":
 					ToolKit.WARH.Solve(div);
+					break;
+				case "fimng":
+					ToolKit.FIMNG.Solve(div);
 					break;
 
 				default:
