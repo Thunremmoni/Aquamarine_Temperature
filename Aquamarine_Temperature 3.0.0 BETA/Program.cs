@@ -10,7 +10,7 @@ namespace Aquamarine_Temperature
 {
 	namespace Templates //模板
 	{
-		class Collections
+		public class Collections
 		{
 			public class Pair<Type>
 			{
@@ -56,7 +56,7 @@ namespace Aquamarine_Temperature
 				Date ret = new Date { };
 				string[] div = it.Split('-');
 				if (div.Length < 3) div = it.Split(' ');
-				if (div.Length < 3) return ret;
+				if (div.Length < 3) throw new ERROR("Did not give enough information or the format is wrong");
 				ret.year = Convert.ToInt32(div[0]); ret.month = Convert.ToInt32(div[1]); ret.day = Convert.ToInt32(div[2]);
 				return ret;
 			}
@@ -91,6 +91,7 @@ namespace Aquamarine_Temperature
 			{
 				public string name;
 				public int inStoreHouse;
+				public List<int> Price;
 				public string String()
 				{
 					return name + " " + inStoreHouse.ToString();
@@ -99,16 +100,22 @@ namespace Aquamarine_Temperature
 				{
 					return inStoreHouse >= Quantity;
 				}
+				public void Refresh()
+				{
+					Price.Sort(); Price.Reverse();
+				}
 			}    //货物
 			public static Good Make_Good(string name, int nums)
 			{
 				Good ret = new Good { };
 				ret.name = name; ret.inStoreHouse = nums;
+				ret.Price = new List<int> { };
 				return ret;
 			}
 			public static Good Make_Good(string it)
 			{
 				Good ret = new Good { };
+				ret.Price = new List<int> { };
 				string[] div = it.Split(' ');
 				try { ret.name = div[0]; ret.inStoreHouse = Convert.ToInt32(div[1]); } catch { }
 				return ret;
@@ -116,7 +123,27 @@ namespace Aquamarine_Temperature
 			public static Good Make_Good(string[] div, int pos = 0)
 			{
 				Good ret = new Good { };
+				ret.Price = new List<int> { };
 				try { ret.name = div[pos]; ret.inStoreHouse = Convert.ToInt32(div[1]); } catch { }
+				return ret;
+			}
+
+			public class Trans
+			{
+				public Templates.Collections.Date date;
+				public string Item;
+				public bool IO;
+				public int price;
+				public int totProfit;
+				public string String()
+				{
+					return date.ToString() + " " + Item.ToString() + " " + IO.ToString() + " " + price.ToString() + " " + totProfit.ToString();
+				}
+			}
+			public static Trans Make_Trans()
+			{
+				Trans ret = new Trans { };
+				ret.date = new Templates.Collections.Date { };
 				return ret;
 			}
 		}
@@ -170,6 +197,16 @@ namespace Aquamarine_Temperature
 
 				writeStream.Flush(); writeStream.Close(); fs.Close();
 			}   //Unfinish
+			public static void ShowFile(string path)
+			{
+				try
+				{
+					StreamReader readStream = new StreamReader(path, Encoding.Default);
+					string show;
+					while ((show = readStream.ReadLine()) != null)
+						Console.WriteLine(show);
+				} catch { Console.WriteLine("Unknown Error"); }
+			}
 		}
 		public static class WARH
 		{
@@ -220,6 +257,16 @@ namespace Aquamarine_Temperature
 						return;
 					}
 			}
+			static void Delete()
+			{
+				string target = Tool.Read("Name >");
+				if (!find(target)) Console.WriteLine("ERROR : Item does not exist!");
+				else
+				{
+					goods.RemoveAt(GetIndex(target));
+					Console.WriteLine("Finished!");
+				}
+			}
 			public static void Solve(string[] args)
 			{
 				if (args.Length <= 1) {
@@ -227,11 +274,51 @@ namespace Aquamarine_Temperature
 				}
 				switch (args[1])
 				{
+					case "-h": FileManager.ShowFile(@".\docs\warh_hp.file");break;
+					case "--help": FileManager.ShowFile(@".\docs\warh_hp.file"); break;
 					case "-i": AddTrace();break;
 					case "--insert": AddTrace();break;
 					case "-q": Query();break;
 					case "--query": Query();break;
 					case "-c": Delta();break;
+					case "-d": Delete();break;
+					case "--delete": Delete();break;
+					default:
+						Console.WriteLine("Command syntax is incorrect"); return;
+				}
+			}
+		}
+		public static class FIMNG
+		{
+			public static List<Objs.Trace.Trans> trans;
+
+			static void Attend()
+			{
+				string answ;
+				Objs.Trace.Trans add = Objs.Trace.Make_Trans();
+				try
+				{
+					answ = Tool.Read("Date >"); add.date = Templates.Collections.Make_Date(answ);
+				}catch(Templates.ERROR er) { Console.WriteLine(er.Message);return; }
+				answ = Tool.Read("Item >");add.Item = answ;
+				answ = Tool.Read(@"I/O >");add.IO = answ == "i";
+				answ = Tool.Read("Price >");add.price = Convert.ToInt32(answ);
+
+				trans.Add(add);
+				Console.WriteLine("Finish!");
+			}
+			public static void Solve(string[] args)
+			{
+				if (args.Length <= 1)
+				{
+					Console.WriteLine("Command syntax is incorrect"); return;
+				}
+				switch (args[1])
+				{
+					case "-h": FileManager.ShowFile(@".\docs\fimng_hp.file"); break;
+					case "--help": FileManager.ShowFile(@".\docs\fimng_hp.file"); break;
+					case "-a": Attend();break;
+					case "--attend": Attend();break;
 					default:
 						Console.WriteLine("Command syntax is incorrect"); return;
 				}
@@ -258,6 +345,11 @@ namespace Aquamarine_Temperature
 			string a = Console.ReadLine(); a = a.ToLower();
 			return a[0] == 'y';
 		}
+		public static string Read(string query)
+		{
+			Console.Write(query);
+			return Console.ReadLine();
+		}
 	}
 
 
@@ -267,6 +359,7 @@ namespace Aquamarine_Temperature
 		{
 			Console.WriteLine("Aquamarine_Temperature [Version : 3.0.0 BETA]\n");
 			ToolKit.WARH.goods = new List<Objs.Trace.Good> { };
+			ToolKit.FIMNG.trans = new List<Objs.Trace.Trans> { };
 		}
 
 		public static void Solve(string arg)
