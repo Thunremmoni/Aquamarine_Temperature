@@ -205,23 +205,28 @@ namespace ConsoleApp1
 	{
 		static void Main(string[] args)
 		{
-			{
-				//string path = Console.ReadLine();
-				//try
-				//{
-				//	StreamReader sr = new StreamReader(@".\" + path, Encoding.Default);
-				//	string output;
-				//	while ((output = sr.ReadLine()) != null)
-				//		Console.WriteLine(output);
-				//} catch {
-				//	Console.WriteLine("ERROR : File Doesn't exist!!");
-				//}
-				//FileStream fs = new FileStream(path, FileMode.Create);
-				//StreamWriter sw = new StreamWriter(fs);
-				//for (int i = 0; i < 3; i++)
-				//	sw.WriteLine(Console.ReadLine());
-				//sw.Flush();sw.Close();fs.Close();
-			}
+			//string path = Console.ReadLine();
+			//try
+			//{
+			//	StreamReader sr = new StreamReader(@".\" + path, Encoding.Default);
+			//	string output;
+			//	while ((output = sr.ReadLine()) != null)
+			//		Console.WriteLine(output);
+			//} catch {
+			//	Console.WriteLine("ERROR : File Doesn't exist!!");
+			//}
+			//FileStream fs = new FileStream(path, FileMode.Create);
+			//StreamWriter sw = new StreamWriter(fs);
+			//for (int i = 0; i < 3; i++)
+			//	sw.WriteLine(Console.ReadLine());
+			//sw.Flush();sw.Close();fs.Close();
+			StreamWriter sw = new StreamWriter(new FileStream(@".\fimng_hp.file", FileMode.Create));
+			sw.WriteLine("FiMng Version : 1.0.0\nTrace recording system\n");
+			sw.WriteLine("Toolkit & option : \n");
+			sw.WriteLine("\t--attend\t-a\tAdd a new record");
+			sw.WriteLine("\t--delete\t-d\tDelete a record from existing records");
+			sw.WriteLine("\t--query\t\t-q\tMake Form");
+			sw.Flush();sw.Close();
 		}
 	}
 }

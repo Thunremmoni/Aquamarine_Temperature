@@ -208,6 +208,23 @@ namespace Aquamarine_Temperature
 				} catch { Console.WriteLine("Unknown Error"); }
 			}
 		}
+		public static class AT
+		{
+			public static void Solve(string[] args)
+			{
+				if (args.Length <= 1) {
+					Console.WriteLine("Command syntax is incorrect"); return;
+				}
+				switch (args[1])
+				{
+					case "-h": FileManager.ShowFile(@".\docs\Aquamarine_Temperature_hp.file"); break;
+					case "--help": FileManager.ShowFile(@".\docs\Aquamarine_Temperature_hp.file"); break;
+					default:
+						Console.WriteLine("Command syntax is incorrect"); return;
+				}
+
+			}
+		}
 		public static class WARH
 		{
 			public static List<Objs.Trace.Good> goods;
@@ -315,6 +332,15 @@ namespace Aquamarine_Temperature
 				foreach (var it in trans)
 					Console.WriteLine("{0}\t{1}\t\t{2}\t{3}\t{4}\t{5}", ++i, it.date.String(), it.Item, it.IO ? "IN" : "OUT", it.price, it.totProfit);
 			}
+			static void Delete()
+			{
+				Query();
+				try
+				{
+					trans.RemoveAt(Convert.ToInt32(Tool.Read("The serial number of the trace that needs to be deleted >")));
+				} catch { Console.WriteLine("Unknown Error");return; } 
+				finally { Console.WriteLine("Finished"); }
+			}
 			public static void Solve(string[] args)
 			{
 				if (args.Length <= 1)
@@ -327,12 +353,18 @@ namespace Aquamarine_Temperature
 					case "--help": FileManager.ShowFile(@".\docs\fimng_hp.file"); break;
 					case "-a": Attend();break;
 					case "--attend": Attend();break;
+					case "-d": Delete();break;
+					case "--delete": Delete();break;
 					case "-q": Query();break;
 					case "--query": Query();break;
 					default:
 						Console.WriteLine("Command syntax is incorrect"); return;
 				}
 			}
+		}
+		public static class MITMF
+		{
+
 		}
 	}
 	public static class Tool
@@ -379,12 +411,9 @@ namespace Aquamarine_Temperature
 			if (div.Length <= 0) return;
 			switch (div[0])
 			{
-				case "cls":
-					Console.Clear();
-					return;
-				case "exit":
-					Environment.Exit(0);
-					break;
+				case "cls": Console.Clear(); return;
+				case "exit": Environment.Exit(0); break;
+				case "at": ToolKit.AT.Solve(div);break;
 				case "warh":
 					ToolKit.WARH.Solve(div);
 					break;
