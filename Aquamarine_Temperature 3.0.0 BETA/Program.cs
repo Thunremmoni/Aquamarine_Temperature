@@ -102,7 +102,7 @@ namespace Aquamarine_Temperature
 				}
 				public void Refresh()
 				{
-					Price.Sort(); Price.Reverse();
+					Price.Sort();
 				}
 			}    //货物
 			public static Good Make_Good(string name, int nums)
@@ -146,6 +146,44 @@ namespace Aquamarine_Temperature
 				ret.date = new Templates.Collections.Date { };
 				return ret;
 			}
+
+			public class Rec
+			{
+				public int type, val;   //+fund -fund +inc -inc
+				public Templates.Collections.Date date;
+				public string String(char it = ' ')
+				{
+					string a;
+					switch (type)
+					{
+						case 1: a = "+fund";break;
+						case 2: a = "-fund";break;
+						case 3: a = "+income";break;
+						case 4: a = "-income";break;
+						default: a = "";break;
+					}
+					return date.String() + it + a + it + val.ToString();
+				}
+			}
+			public static Rec Make_Rec(Templates.Collections.Date date,int type,int val)
+			{
+				Rec ret = new Rec { };
+				ret.date = date; ret.type = type;ret.val = val;
+				return ret;
+			}
+			public class Investor
+			{
+				public string name;
+				public int fund, income;
+				public List<Rec> rec;
+			}
+			public static Investor Make_Investor(string name)
+			{
+				Investor ret = new Investor { };
+				ret.rec = new List<Rec> { };ret.name = name;
+				return ret;
+			}
+
 		}
 	}
 	namespace ToolKit
@@ -364,7 +402,79 @@ namespace Aquamarine_Temperature
 		}
 		public static class MITMF
 		{
+			public static int AvaFund, TotIncome, TotFund;
+			public static List<Objs.Trace.Investor> investor;
+			static int GetPos(string name)
+			{
+				for (int i = 0; i < investor.Count; i++)
+					if (investor[i].name == name) return i;
+				return -1;
+			}
 
+			static void Attend()
+			{
+				string name = Tool.Read("Name >");
+				if (GetPos(name) != -1) { Console.WriteLine("ERROR : Name conflict");return; }
+				investor.Add(Objs.Trace.Make_Investor(name));
+				Console.WriteLine("Finished");
+			}
+			static void Insert()
+			{
+				string name = Tool.Read("Target Client >");
+				int pos = GetPos(name);
+				if (pos == -1) { Console.WriteLine("ERROR : Target does not exist");return; }
+				Console.WriteLine("Options : \n1\t+Fund\n2\t-Fund\n3\t+Income\n4\t-Income");
+				int opt = Convert.ToInt32(Tool.Read("Option >"));
+				if (!(opt <= 1 && opt <= 4)) { Console.WriteLine("ERROR : Unkonwn Option");return; }
+				Templates.Collections.Date date = Templates.Collections.Make_Date(Tool.Read("Date >"));
+				int val = Convert.ToInt32(Tool.Read("Value >"));
+				investor[pos].rec.Add(Objs.Trace.Make_Rec(date, opt, val));
+				switch (opt)
+				{
+					case 1: AvaFund += val;TotFund += val;investor[pos].fund += val; break;
+					case 2: AvaFund -= val;TotFund -= val;investor[pos].fund -= val; break;
+					case 3: TotIncome += val;investor[pos].income += val;break;
+					case 4: TotIncome -= val;investor[pos].income -= val;break;
+					default: break;
+				}
+				Console.WriteLine("Finished!");
+			}
+			static void Record()
+			{
+
+			}
+			static void Query()
+			{
+				Console.WriteLine("Avalible Fund\tTotal Fund\tTotal Income");
+				Console.WriteLine("{0}\t\t{1}\t\t{2}\n", AvaFund, TotFund, TotIncome);
+				Console.WriteLine("{0} Investor(s) in total", investor.Count);
+				Console.WriteLine("#\tname\tFund\tIncome");
+				int i = 0;
+				foreach (var it in investor)
+					Console.WriteLine("{0}\t{1}\t{2}\t{3}", (++i).ToString(), it.name, it.fund, it.income);
+			}
+			public static void Solve(string[] args)
+			{
+				if (args.Length <= 1) {
+					Console.WriteLine("Command syntax is incorrect"); return;
+				}
+				switch (args[1])
+				{
+					case "-h": FileManager.ShowFile(@".\docs\mitmf_hp.file"); break;
+					case "--help": FileManager.ShowFile(@".\docs\mitmf_hp.file"); break;
+					case "-a": Attend();break;
+					case "--attend": Attend();break;
+					case "-i": Insert();break;
+					case "--insert": Insert();break;
+					case "-q": Query();break;
+					case "--query": Query();break;
+					case "-r": Record();break;
+					case "--record": Record();break;
+					default:
+						Console.WriteLine("Command syntax is incorrect"); return;
+				}
+
+			}
 		}
 	}
 	public static class Tool
@@ -402,6 +512,7 @@ namespace Aquamarine_Temperature
 			Console.WriteLine("Aquamarine_Temperature [Version : 3.0.0 BETA]\n");
 			ToolKit.WARH.goods = new List<Objs.Trace.Good> { };
 			ToolKit.FIMNG.trans = new List<Objs.Trace.Trans> { };
+			ToolKit.MITMF.investor = new List<Objs.Trace.Investor> { };
 		}
 
 		public static void Solve(string arg)
@@ -414,11 +525,16 @@ namespace Aquamarine_Temperature
 				case "cls": Console.Clear(); return;
 				case "exit": Environment.Exit(0); break;
 				case "at": ToolKit.AT.Solve(div);break;
+					
+					//Tools
 				case "warh":
 					ToolKit.WARH.Solve(div);
 					break;
 				case "fimng":
 					ToolKit.FIMNG.Solve(div);
+					break;
+				case "mitmf":
+					ToolKit.MITMF.Solve(div);
 					break;
 
 				default:
