@@ -441,7 +441,7 @@ namespace Aquamarine_Temperature
 			}
 			static void Record()
 			{
-
+				
 			}
 			static void Query()
 			{
