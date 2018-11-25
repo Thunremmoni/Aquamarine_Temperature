@@ -1,4 +1,4 @@
-The Mozilla License (Mozilla)
+The MIT License (MIT)
 
 
 
