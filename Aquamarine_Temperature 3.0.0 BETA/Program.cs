@@ -147,25 +147,54 @@ namespace Aquamarine_Temperature
 				return ret;
 			}
 
+			public enum DoSums
+			{
+				Afund,Mfund,Ainc,Minc
+			};
+			public static DoSums Make_DoSums (int it)
+			{
+				DoSums ret = new DoSums { };
+				switch (it)
+				{
+					case 1:ret = DoSums.Afund;break;
+					case 2:ret = DoSums.Mfund;break;
+					case 3:ret = DoSums.Ainc;break;
+					case 4:ret = DoSums.Minc;break;
+					default: break;
+				}
+				return ret;
+			}
+			public static string ToString(DoSums it)
+			{
+				switch (it)
+				{
+					case DoSums.Afund:return "+Fund";
+					case DoSums.Mfund:return "-Fund";
+					case DoSums.Ainc:return "+Income";
+					case DoSums.Minc:return "-Income";
+					default: break;
+				}return "";
+			}
 			public class Rec
 			{
-				public int type, val;   //+fund -fund +inc -inc
 				public Templates.Collections.Date date;
+				public DoSums type;  //+fund -fund +inc -inc
+				public int val; 
 				public string String(char it = ' ')
 				{
-					string a;
-					switch (type)
+					string a = type.ToString();
+					/*switch (type)
 					{
 						case 1: a = "+fund";break;
 						case 2: a = "-fund";break;
 						case 3: a = "+income";break;
 						case 4: a = "-income";break;
 						default: a = "";break;
-					}
+					}*/
 					return date.String() + it + a + it + val.ToString();
 				}
 			}
-			public static Rec Make_Rec(Templates.Collections.Date date,int type,int val)
+			public static Rec Make_Rec(Templates.Collections.Date date,DoSums type,int val)
 			{
 				Rec ret = new Rec { };
 				ret.date = date; ret.type = type;ret.val = val;
@@ -428,7 +457,8 @@ namespace Aquamarine_Temperature
 				if (!(opt <= 1 && opt <= 4)) { Console.WriteLine("ERROR : Unkonwn Option");return; }
 				Templates.Collections.Date date = Templates.Collections.Make_Date(Tool.Read("Date >"));
 				int val = Convert.ToInt32(Tool.Read("Value >"));
-				investor[pos].rec.Add(Objs.Trace.Make_Rec(date, opt, val));
+				investor[pos].rec.Add(Objs.Trace.Make_Rec(date, Objs.Trace.Make_DoSums(opt), val));
+
 				switch (opt)
 				{
 					case 1: AvaFund += val;TotFund += val;investor[pos].fund += val; break;
